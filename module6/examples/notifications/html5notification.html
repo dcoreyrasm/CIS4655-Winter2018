@@ -1,0 +1,331 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>My Page</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link rel="stylesheet" href="themes/rasmussenthemeroller.min.css" />
+<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="javascript/storage.js"></script>
+<script>
+	var Notification = window.Notification || window.mozNotification || window.webkitNotification;
+
+	Notification.requestPermission(function (permission) {
+		// console.log(permission);
+	});
+
+	function show() {
+		window.navigator.vibrate([300,100,300])
+		window.setTimeout(function () {
+			var instance = new Notification(
+				"Rasmussen College Test App Notification", {
+					body: "This is a test notification to see if you're paying attention!",
+					icon: "data:image/jpeg;base64,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"
+
+				}
+			);
+
+			instance.onclick = function () {
+				// Something to do
+			};
+			instance.onerror = function () {
+				// Something to do
+			};
+			instance.onshow = function () {
+				// Something to do
+			};
+			instance.onclose = function () {
+				// Something to do
+			};
+		}, 1000);
+	}
+</script>
+
+<button type="button" onclick="show()">Notify me!</button>
+
+
+	
+</head> 
+<body onload="doShowAll()"> 
+	<?php include_once("analyticstracking.php") ?>
+
+
+<div id="page" data-role="page" data-theme="b" >
+	<div data-role="header" data-theme="b">
+	  <div class="logo"><img src="images/rasmussen_logo.png" width="218" height="45" alt=""/></div>
+	</div>
+    
+    <div data-role="panel" id="myPanel">
+    <h2>Panel Header</h2>
+    <p>This is my new panel.</p>
+    
+    		<ul>
+			<li class="menu1"><a href="#menu1">Menu 1</a></li>
+            <li class="menu2"><a href="#menu2">Menu 2</a></li>
+			<li class="menu3"><a href="#menu3">Menu 3</a></li>
+          
+		</ul>	
+    </div>
+    
+	<div data-role="content">	
+		<button type="button" onclick="show()">Notify me!</button>
+		<ul data-role="listview" data-theme="b">
+			<li><a href="#section1">Section 1</a></li>
+            <li><a href="#section2">Section 2</a></li>
+			<li><a href="#section3">Section 3</a></li>
+			<li><a href="#section4">Section 4</a></li>
+			<li><a href="#section5">Section 5</a></li>
+			<li><a href="#section6">Section 6</a></li>
+			<li><a href="#LiveLecturePage">LiveLecturePage</a></li>
+			<li><a href="#section7">Section 7</a></li>
+			<li><a href="#section8">Section 8</a></li>
+           
+		</ul>		
+	</div>
+	<div data-role="footer" data-theme="b">
+<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b" data-inline="true">Bars</a>
+<a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-theme="b" data-inline="true">Edit</a>
+<a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="b" data-inline="true">Arrow left</a>
+<a href="#" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="b" data-inline="true">Arrow right</a>
+<a href="#" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="b" data-inline="true">Arrow up</a>
+<a href="#" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="b" data-inline="true">Arrow down</a>
+<a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="b" data-inline="true">Delete</a>
+<a href="#" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="b" data-inline="true">Plus</a>
+<a href="#" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="b" data-inline="true">Minus</a>
+<a href="#" data-role="button" data-icon="check" data-iconpos="notext" data-theme="b" data-inline="true">Check</a>
+<a href="#" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="b" data-inline="true">Gear</a>
+<a href="#" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="b" data-inline="true">Refresh</a>
+<a href="#" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="b" data-inline="true">Forward</a>
+<a href="#" data-role="button" data-icon="back" data-iconpos="notext" data-theme="b" data-inline="true">Back</a>
+<a href="#" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b" data-inline="true">Grid</a>
+<a href="#" data-role="button" data-icon="alert" data-iconpos="notext" data-theme="b" data-inline="true">Alert</a>
+<a href="#" data-role="button" data-icon="info" data-iconpos="notext" data-theme="b" data-inline="true">Info</a>
+<a href="#" data-role="button" data-icon="home" data-iconpos="notext" data-theme="b" data-inline="true">Home</a>
+<a href="#" data-role="button" data-icon="search" data-iconpos="notext" data-theme="b" data-inline="true">Search</a>
+	  <h4>Your App &copy; 2015</h4>
+	</div>
+</div>
+
+<div id="section1" data-role="page" data-theme="b" data-transition="slideup">
+	<div data-role="header" data-theme="b" data-add-back-btn="true">
+	  <h1>Section 1</h1>
+	</div>
+	<div data-role="content">
+	  <h3>Header</h3>
+	  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec massa tincidunt, porttitor enim sit amet, pellentesque nunc. Proin varius mollis ultricies. In aliquam dapibus orci, quis dictum dui sollicitudin vel. Vivamus nec malesuada leo. Nulla est orci, ornare ut ultricies a, bibendum in sem. Donec convallis pharetra ligula in malesuada. Ut hendrerit dui et aliquam dignissim. Aenean a metus eget felis tempor pellentesque nec iaculis ipsum. </p>
+	  <a href="#" data-role="button">Button</a>
+	  <div data-role="controlgroup" data-type="horizontal">
+	    <input type="submit" value="Submit" data-icon="star" />
+	    <input type="submit" value="Submit" data-icon="star" />
+      </div>
+      
+	  <h3>Header</h3>
+	  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec massa tincidunt, porttitor enim sit amet, pellentesque nunc. Proin varius mollis ultricies. In aliquam dapibus orci, quis dictum dui sollicitudin vel. Vivamus nec malesuada leo. Nulla est orci, ornare ut ultricies a, bibendum in sem. Donec convallis pharetra ligula in malesuada. Ut hendrerit dui et aliquam dignissim. Aenean a metus eget felis tempor pellentesque nec iaculis ipsum. </p>
+	</div>
+	<div data-role="footer" data-theme="b">
+	  <h4>Your App &copy; 2015</h4>
+	</div>
+</div>
+
+<div id="section2" data-role="page" data-theme="b"  data-transition="slideup">
+	<div data-role="header" data-theme="b" data-add-back-btn="true">
+		<h1>Section 2</h1>
+	</div>
+	<div data-role="content">	
+	  <h3>Header</h3>
+	  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec massa tincidunt, porttitor enim sit amet, pellentesque nunc. Proin varius mollis ultricies. In aliquam dapibus orci, quis dictum dui sollicitudin vel. Vivamus nec malesuada leo. Nulla est orci, ornare ut ultricies a, bibendum in sem. Donec convallis pharetra ligula in malesuada. Ut hendrerit dui et aliquam dignissim. Aenean a metus eget felis tempor pellentesque nec iaculis ipsum. </p>
+	  <h3>Header</h3>
+	  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec massa tincidunt, porttitor enim sit amet, pellentesque nunc. Proin varius mollis ultricies. In aliquam dapibus orci, quis dictum dui sollicitudin vel. Vivamus nec malesuada leo. Nulla est orci, ornare ut ultricies a, bibendum in sem. Donec convallis pharetra ligula in malesuada. Ut hendrerit dui et aliquam dignissim. Aenean a metus eget felis tempor pellentesque nec iaculis ipsum. </p>
+	</div>
+	<div data-role="footer" data-theme="b">
+		<h4>Your App &copy; 2015</h4>
+	</div>
+</div>
+
+<div id="section3" data-role="page" data-theme="b" data-transition="slideup">
+	<div data-role="header" data-theme="b" data-add-back-btn="true">
+		<h1>Section 3</h1>
+	</div>
+	<div data-role="content">	
+	  <h3>Header</h3>
+	  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec massa tincidunt, porttitor enim sit amet, pellentesque nunc. Proin varius mollis ultricies. In aliquam dapibus orci, quis dictum dui sollicitudin vel. Vivamus nec malesuada leo. Nulla est orci, ornare ut ultricies a, bibendum in sem. Donec convallis pharetra ligula in malesuada. Ut hendrerit dui et aliquam dignissim. Aenean a metus eget felis tempor pellentesque nec iaculis ipsum. </p>
+	  <h3>Header</h3>
+	  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec massa tincidunt, porttitor enim sit amet, pellentesque nunc. Proin varius mollis ultricies. In aliquam dapibus orci, quis dictum dui sollicitudin vel. Vivamus nec malesuada leo. Nulla est orci, ornare ut ultricies a, bibendum in sem. Donec convallis pharetra ligula in malesuada. Ut hendrerit dui et aliquam dignissim. Aenean a metus eget felis tempor pellentesque nec iaculis ipsum. </p>
+      </div>
+	<div data-role="footer" data-theme="b">
+	  <h4>Your App &copy; 2015</h4>
+	</div>
+</div>
+
+<div id="section4" data-role="page" data-theme="b"  data-transition="slideup">
+	<div data-role="header" data-theme="b" data-add-back-btn="true">
+		<h1>Section 4</h1>
+	</div>
+	<div data-role="content">	
+	  <h3>Header</h3>
+	  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec massa tincidunt, porttitor enim sit amet, pellentesque nunc. Proin varius mollis ultricies. In aliquam dapibus orci, quis dictum dui sollicitudin vel. Vivamus nec malesuada leo. Nulla est orci, ornare ut ultricies a, bibendum in sem. Donec convallis pharetra ligula in malesuada. Ut hendrerit dui et aliquam dignissim. Aenean a metus eget felis tempor pellentesque nec iaculis ipsum. </p>
+	  <h3>Header</h3>
+	  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec massa tincidunt, porttitor enim sit amet, pellentesque nunc. Proin varius mollis ultricies. In aliquam dapibus orci, quis dictum dui sollicitudin vel. Vivamus nec malesuada leo. Nulla est orci, ornare ut ultricies a, bibendum in sem. Donec convallis pharetra ligula in malesuada. Ut hendrerit dui et aliquam dignissim. Aenean a metus eget felis tempor pellentesque nec iaculis ipsum. </p>
+      </div>
+	<div data-role="footer" data-theme="b">
+	  <h4>Your App &copy; 2015</h4>
+	</div>
+</div>
+
+<div data-role="page" id="section5" data-theme="b">
+	<div data-role="header" data-theme="b" data-add-back-btn="true"> 
+		<h1>Section 5</h1>
+	</div>
+  <div data-role="content">	
+	  <h3>Header</h3>
+	  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec massa tincidunt, porttitor enim sit amet, pellentesque nunc. Proin varius mollis ultricies. In aliquam dapibus orci, quis dictum dui sollicitudin vel. Vivamus nec malesuada leo. Nulla est orci, ornare ut ultricies a, bibendum in sem. Donec convallis pharetra ligula in malesuada. Ut hendrerit dui et aliquam dignissim. Aenean a metus eget felis tempor pellentesque nec iaculis ipsum. </p>
+	</div>
+	<div data-role="footer" data-theme="b">
+		<h4>Your App &copy; 2015</h4>
+	</div>
+</div>
+
+<div data-role="page" id="LiveLecturePage"  data-transition="slide">
+  <div data-role="header" data-theme="b" data-add-back-btn="true">
+    <h1>Header</h1>
+  </div>
+  <div data-role="content">
+ 	<h1>Enter Items And Quantity</h1>
+	<form name=ShoppingList>
+
+		<div id="PlayArea">
+			<table>
+				<tr>
+
+					<td><b>Item:</b><input type=text name=name></td>
+					<td><b>Quantity:</b><input type=text name=data></td>
+
+				</tr>
+
+				<tr>
+					<td>
+					    <input type=button value="Save"   onclick="SaveItem()"> 
+					    <input type=button value="Modify" onclick="ModifyItem()"> 
+					    <input type=button value="Remove" onclick="RemoveItem()">
+					  </td>
+				</tr>
+			</table>
+		</div>
+
+		<div id="items_table">
+			<h2>Shopping List</h2>
+			<table id=list></table>
+			<p>
+				<label><input type=button value="Clear" onclick="ClearAll()">
+					<i>* Removes all items</i></label>
+			</p>
+		</div>
+	</form>
+</div>
+
+  </div>
+  <div data-role="footer" data-theme="b">
+    <h4>Footer</h4>
+  </div>
+</div>
+
+
+
+<div id="section6" data-role="page" data-theme="b"  data-transition="slideup">
+	<div data-role="header" data-theme="b" data-add-back-btn="true">
+		<h1>Section 6</h1>
+	</div>
+
+	<div data-role="footer" data-theme="b">
+	  <h4>Your App &copy; 2015</h4>
+	</div>
+</div>
+
+<div id="section7" data-role="page" data-theme="b"  data-transition="slideup">
+	<div data-role="header" data-theme="b" data-add-back-btn="true">
+		<h1>Section 7</h1>
+	</div>
+	<div data-role="content">	
+      <h3>Header</h3>
+      
+            <form action="http://formtoemail.com/user_forms.php" method="post" style="background:#eee;width:300px;padding:15px;border-radius:10px;">
+                <input type="hidden" name="user_id" value="XTW435JVN6CI3ZMOP6ZK">
+                <input type="hidden" name="form_id" value="1">
+                Name <br><input type="text" name="name" style="width:100%;margin:0 0 10px;">
+                Email Address <br><input type="text" name="email" style="width:100%;margin:0 0 10px;">
+                Comments <br><textarea name="comments" style="width:100%;height:120px;margin:0 0 10px;"></textarea>
+                <input type="submit" value="Send"> <span style="font:10px arial;float:right;color:#666;">Created with <a href="http://formtoemail.com" style="color:#666">FormToEmail</a></span>
+            </form>
+        
+      </div>
+	<div data-role="footer" data-theme="b">
+	  <h4>Your App &copy; 2015</h4>
+	</div>
+</div>
+
+<div id="section8" data-role="page" data-theme="b"  data-transition="slideup">
+	<div data-role="header" data-theme="b" data-add-back-btn="true">
+		<h1>Section 8</h1>
+	</div>
+      <div data-role="content">	
+      <form>
+        <div data-role="fieldcontain">
+          <label for="fname">First Name:</label>
+          <input type="text" name="textinput" id="textinput" value=""  />
+        </div>
+        
+        
+        <div data-role="fieldcontain">
+          <label for="selectmenu" class="select">Ice Cream Flavor</label>
+          <select name="selectmenu" id="selectmenu">
+            <option value="Vanilla">Vanilla</option>
+            <option value="Chocolate">Chocolate</option>
+            <option value="Strawberry">Strawberry</option>
+          </select>
+        </div>
+        
+        <div data-role="fieldcontain">
+          <fieldset data-role="controlgroup">
+            <legend>Membership</legend>
+            <input type="checkbox" name="Membership" id="Membership_0" class="custom" value="" />
+            <label for="Membership_0">1 Year</label>
+            <input type="checkbox" name="Membership" id="Membership_1" class="custom" value="" />
+            <label for="Membership_1">2 Year</label>
+            <input type="checkbox" name="Membership" id="Membership_2" class="custom" value="" />
+            <label for="Membership_2">3 Year</label>
+          </fieldset>
+        </div>
+        
+        <div data-role="fieldcontain">
+          <fieldset data-role="controlgroup" data-type="horizontal">
+            <legend>Ice Cream for Life</legend>
+            <input type="radio" name="IceCreamforLife" id="IceCreamforLife_0" value="" />
+            <label for="IceCreamforLife_0">No</label>
+            <input type="radio" name="IceCreamforLife" id="IceCreamforLife_1" value="" />
+            <label for="IceCreamforLife_1">Yes</label>
+            <input type="radio" name="IceCreamforLife" id="IceCreamforLife_2" value="" />
+            <label for="IceCreamforLife_2">Maybe</label>            
+          </fieldset>
+        </div>
+        <div data-role="fieldcontain">
+          <label for="search">Search:</label>
+          <input type="search" name="search" id="search" value=""  />
+        </div>
+      
+      
+      
+      
+      </form>
+      
+      </div>
+
+	<div data-role="footer" data-theme="b">
+	  <h4>Your App &copy; 2015</h4>
+	</div>
+</div>
+
+
+</body>
+</html>
